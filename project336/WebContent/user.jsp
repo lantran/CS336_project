@@ -17,7 +17,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>User starting page</title>
+		<title>User starting page test</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
