@@ -26,14 +26,27 @@
 		<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<head>RUMARKET PROJECT CS336 </head>
-	<br><br><br>
-	<body>
 	
+	</head> 
+	
+	<body>
+		<h1> Project CS 336 : RUMARKET </h1>
+		<br>
+		<br>
+		<br>
+		<h2> Hi, welcome 
+		
+		<% String user = (String) session.getAttribute("current_user") ; 
+		 out.println (user);%>
+		 
+		 to RUMARKET !
+		 </h2>
+		 <br>
+		 <br>
+		 
 		<a href="user.jsp"> Users </a> <br>
 		<a href="item.jsp"> Items </a> <br>
 		<a href="mail.jsp"> Mails </a> <br>
-		
 		<br>
 		
 	</body>

@@ -8,5 +8,13 @@
 </head>
 <body>
 
+<form method=post action=verify.jsp>
+Please input your information to log in 
+<br>
+<br>
+User Name( your first name ): <input type="text" name="firstname" /> <br />
+Email: <input type="password" name="email" /> <br />
+<input type="submit" value="Submit" />
+</form>
 </body>
 </html>

@@ -31,7 +31,7 @@
 
 	<body>
 		
-		List of user 
+		List of the item 
 		
 		<br><br><br>
 
@@ -39,30 +39,34 @@
 		<%
 			try {		
 				
-				//Get the max unit price inputed by the user
-				String userId =request.getParameter("userId");
-
-				out.println("<tr><td>The product you wanted is :" + userId + "</td><tr>");
-				out.println("<br><br><br>");
-				
 				java.sql.Connection con;			
 				Statement stmt;			
 				ResultSet rs;			
-
+	
 				Context ctx = new InitialContext();
 				DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/test");	
 				con = ds.getConnection();
 				stmt = con.createStatement();
 				
 				//Use maxUnitPrice as the condition in the query
-				rs = stmt.executeQuery("SELECT userid, profileid from user where user.userid LIKE '" + userId +"'");
+				rs = stmt.executeQuery("SELECT * FROM item i WHERE i.itemid NOT IN ( select i.itemid from item i, edititem e WHERE i.itemid = e.itemid and e.action = 'Delete') ");
 				
 				out.println("<table border=1 width=400>");
-				out.println("<tr><td>    userId"  + "</td><td>    ProfileId"  + "</td></tr>");
+				out.println("<tr><td>    itemId"  + "</td><td>    price"  + "</td><td>    picture" 
+							+ "</td><td>    category"  + "</td><td>   quality"  + "</td><td>   description" 
+							+ "</td><td>  type of listing "  + "</td><td>   status "  + "</td></tr>");
 				while (rs.next()) {
-					String name = rs.getString(1);
+					String itemid = rs.getString(1);
 					String price = rs.getString(2);
-					out.println("<tr><td>" + name + "</td><td>" + price+ "</td></tr>");
+					String picture = rs.getString(3);
+					String category = rs.getString(4);
+					String quality = rs.getString(5);
+					String description = rs.getString(6);
+					String typeoflisting = rs.getString(7);
+					String status = rs.getString(8);
+					out.println("<tr><td>" + itemid + "</td><td>" + price+ "</td><td>" + picture + "</td><td>"
+								+ category + "</td><td>" + quality + "</td><td>" 
+							+ description + "</td><td>" + typeoflisting + "</td><td>" + status + "</td></tr>");
 				} 
 				out.println("</table>");
 				
@@ -73,6 +77,11 @@
 			} catch (Exception e) {
 				out.println(e.getMessage());
 			}
+		
+			
+		
+
+			
 		%>
 
 
