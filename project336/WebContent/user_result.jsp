@@ -98,7 +98,34 @@
 					String country = rs.getString(6);
 					out.println("<tr><td>" + address + "</td><td>" + city+ "</td><td>" + state + "</td><td>" + country + "</td></tr>");
 				} 
-				out.println("</table>");				
+				out.println("</table>");
+
+				//Add location
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Add a location:");
+				out.println("<br><label>Address: </labe><input type='text' name='address' />");
+				out.println("<label>City: </labe><input type='text' name='city' />");
+				out.println("<label>State: </labe><input type='text' name='state' />");
+				out.println("<label>Country: </labe><input type='text' name='country' />");
+				out.println("<input type='hidden' name='processtype' value='addlocation' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
+				
+				//Delete location
+				rs = stmt.executeQuery("SELECT * from haslocation h where h.profileid LIKE '" + profileid +"'");
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Delete a location: <select name=\"locationid\">");
+				out.println("<option value=\"0\" selected>(please select:)</option>");
+				while (rs.next()) {
+					String locationid = rs.getString(1);
+					String name = rs.getString(3);
+					name += " " + rs.getString(4);
+					name += " " + rs.getString(5);
+					name += " " + rs.getString(6);
+					out.println("<option value=\"" + locationid + "\">" + name + "</option>");
+				}
+				out.println("</select>");
+				out.println("<input type='hidden' name='processtype' value='deletelocation' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
 				
 				//Get and output interest info
 				out.println("<br><hr><br>Interests<br>");
@@ -110,6 +137,27 @@
 					out.println("<tr><td>" + interestName + "</td></tr>");
 				} 
 				out.println("</table>");
+				
+				//Add interest
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Add an interest:");
+				out.println("<input type='text' name='interestName' />");
+				out.println("<input type='hidden' name='processtype' value='addinterest' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
+				
+				//Delete interest
+				rs = stmt.executeQuery("SELECT * from hasinterest h where h.profileid LIKE '" + profileid +"'");
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Delete an interest: <select name=\"interestid\">");
+				out.println("<option value=\"0\" selected>(please select:)</option>");
+				while (rs.next()) {
+					String interestid = rs.getString(1);
+					String name = rs.getString(2);
+					out.println("<option value=\"" + interestid + "\">" + name + "</option>");
+				}
+				out.println("</select>");
+				out.println("<input type='hidden' name='processtype' value='deleteinterest' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
 				
 				//Get and output job info
 				out.println("<br><hr><br>Job Experience<br>");
@@ -124,6 +172,33 @@
 					out.println("<tr><td>" + CompanyName + "</td><td>" + position + "</td><td>" + startDate + "</td><td>" + endDate + "</td></tr>");
 				} 
 				out.println("</table>");
+				
+				//Add job experience
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Add job experience:");
+				out.println("<br><label>Company Name: </labe><input type='text' name='CompanyName' />");
+				out.println("<label>Position: </labe><input type='text' name='position' />");
+				out.println("<label>Start Date: </labe><input type='text' name='startDate' />");
+				out.println("<label>End Date: </labe><input type='text' name='endDate' />");
+				out.println("<input type='hidden' name='processtype' value='addjobexperience' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
+				
+				//Delete job experience
+				rs = stmt.executeQuery("SELECT * from hasjobexperience h where h.profileid LIKE '" + profileid +"'");
+				out.println("<form name=\"input\" action=\"user_update.jsp\" method=\"post\">Delete job experience: <select name=\"jobid\">");
+				out.println("<option value=\"0\" selected>(please select:)</option>");
+				while (rs.next()) {
+					String jobid = rs.getString(1);
+					String name = rs.getString(3);
+					name += " " + rs.getString(4);
+					name += " " + rs.getString(5);
+					name += " " + rs.getString(6);
+					out.println("<option value=\"" + jobid + "\">" + name + "</option>");
+				}
+				out.println("</select>");
+				out.println("<input type='hidden' name='processtype' value='deletejobexperience' />");
+				out.println("<input type='hidden' name='profileid' value=" + profileid + " />");
+				out.println("<input type=\"submit\" value=\"Submit\"></form>");
 				
 				//Get and output friend info
 				out.println("<br><hr><br>Friends<br>");
@@ -207,6 +282,7 @@
 			<label>Graduation Year: </label><input type="text" name="gradYear" value=<%=gradYear%> />
 			<br>
 			<label>Major: </label><input type="text" name="degree" value=<%=degree%> />
+			<input type='hidden' name='processtype' value='updateinfo' />
 			<input type="submit" value="Submit" />
 		</form>
 
