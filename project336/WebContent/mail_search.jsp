@@ -84,11 +84,17 @@
 					//out.println("<tr><td>    id"  + "</td><td>    datetime"  + "</td><td>    sender" + "</td><td>    msgid"  + "</td></tr>");
 					String sendsMessageid = rs.getString(1);
 					String datetime = rs.getString(2);
-					String sender = rs.getString(3);
+					String senderid = rs.getString(3);
 					String msgid = rs.getString(4);
 					//out.println("<tr><td>" + id + "</td><td>" + datetime+ "</td><td>" + sender + "</td><td>" + msgid + "</td></tr>");
 					out.println("<tr><td>Message ID: " + msgid + "</td></tr>");
 					out.println("<tr><td>Date and Time: " + datetime + "</td></tr>");
+
+					ResultSet senderresult = stmt4.executeQuery("SELECT p.firstName, p.lastName from user u, profile p where u.profileid=p.profileid and u.userid= '" + senderid + "'" );
+					senderresult.next();
+					String sender = senderresult.getString(1);
+					sender += " " + senderresult.getString(2);
+					out.println("<tr><td>Sender: " + sender + "</td></tr>");
 					ResultSet msgcontent = stmt2.executeQuery("SELECT title, content from message m where m.msgid= '" + msgid +"'");
 					msgcontent.next();
 					String title = msgcontent.getString(1);
