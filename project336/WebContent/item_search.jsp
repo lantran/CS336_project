@@ -70,9 +70,10 @@
 					String status = rs.getString(8);
 					out.println("<tr><td>" + itemid + "</td><td>" + price+ "</td><td>" + picture + "</td><td>"
 								+ category + "</td><td>" + quality + "</td><td>" 
-							+ description + "</td><td>" + typeoflisting + "</td><td>" + status + "</td></tr>");
+							+ description + "</td><td>" + typeoflisting + "</td><td>" + status + "</td>  </tr>");
 				} 
 				out.println("</table>");
+				
 				
 				rs.close();
 				stmt.close();
@@ -88,7 +89,15 @@
 
 			
 		%>
-
+		
+		
+		<form name="buyItem" action="item_buy.jsp" method="post">
+			<h2> Want to buy? Please, Input the id of the item you want to buy </h2>
+			<br>
+			<input type = "text" name="buyId" >
+		    <input type="submit" value="Buy Item" /> 
+		</form>
+		
 
 	</body>
 </html>
