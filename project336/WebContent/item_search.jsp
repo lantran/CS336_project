@@ -53,12 +53,13 @@
 				stmt = con.createStatement();
 				
 				//Use maxUnitPrice as the condition in the query
-				rs = stmt.executeQuery("SELECT *  FROM item WHERE item.category = '" + categoryid +"'" );
+				rs = stmt.executeQuery("SELECT *  FROM item WHERE item.status= 'Available' and item.category = '" + categoryid +"'" );
 				
+				out.println("<form name='buyItem' action='item_buy.jsp' method='post' >");
 				out.println("<table border=1 width=400>");
 				out.println("<tr><td>    itemId"  + "</td><td>    price"  + "</td><td>    picture" 
 							+ "</td><td>    category"  + "</td><td>   quality"  + "</td><td>   description" 
-							+ "</td><td>  type of listing "  + "</td><td>   status "  + "</td></tr>");
+							+ "</td><td>  type of listing "  + "</td><td>   status "  + "</td> <td>   Buy     Item   </td></tr>");
 				while (rs.next()) {
 					String itemid = rs.getString(1);
 					String price = rs.getString(2);
@@ -70,9 +71,18 @@
 					String status = rs.getString(8);
 					out.println("<tr><td>" + itemid + "</td><td>" + price+ "</td><td>" + picture + "</td><td>"
 								+ category + "</td><td>" + quality + "</td><td>" 
-							+ description + "</td><td>" + typeoflisting + "</td><td>" + status + "</td>  </tr>");
+							+ description + "</td><td>" + typeoflisting + "</td><td>" + status + "</td><td> <input type='radio' name='buyId' value=' " + rs.getString(1)  +  "  ' />   </td> </tr>");
 				} 
+				
 				out.println("</table>");
+				out.println("<br>");
+				out.println("<br>");
+				out.println("<br>");
+			
+				
+				out.println("<input type='submit' value='Buy Item' />");
+				
+				out.println("</form>");
 				
 				
 				rs.close();
@@ -85,19 +95,16 @@
 			}
 			
 			
-			
-
-			
 		%>
 		
-		
-		<form name="buyItem" action="item_buy.jsp" method="post">
-			<h2> Want to buy? Please, Input the id of the item you want to buy </h2>
-			<br>
-			<input type = "text" name="buyId" >
-		    <input type="submit" value="Buy Item" /> 
-		</form>
-		
+		<% 
+		//<form name="buyItem" action="item_buy.jsp" method="post">
+		//	<h2> Want to buy? Please, Input the id of the item you want to buy </h2>
+		//	<br>
+		//	<input type = "text" name="buyId" >
+		//   <input type="submit" value="Buy Item" /> 
+		//</form>
+		%>
 
 	</body>
 </html>

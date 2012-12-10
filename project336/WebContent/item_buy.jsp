@@ -68,7 +68,7 @@
 							
 				// insert the data into the transaction table
 				
-				stmt.executeUpdate("INSERT INTO  transaction ( buyerid, sellerid, realPrice, transactiontype , transactionDateTime ) VALUES ('" + buyerId + "','" + sellerId + "','" + priceId + "', 'Buy'  , now())" ) ;   
+				stmt.executeUpdate("INSERT INTO  transaction ( buyerid, sellerid, itemid, realPrice, transactiontype , transactionDateTime ) VALUES ('" + buyerId + "','" + sellerId +"','" + buyId + "','" + priceId + "', 'Buy'  , now())" ) ;   
 			
 				// update the status of the product
 				stmt.executeUpdate("UPDATE item SET status = 'Sold' WHERE itemid = '"+ buyId+ "'"); 
@@ -104,12 +104,13 @@
 			} catch (Exception e) {
 				out.println(e.getMessage());
 			}
-		
-			
-		
-
+	
 			
 		%>
+		
+		 <br>
+		 
+		<a href="index.jsp"> Return to the index page </a> <br>
 
 
 	</body>
