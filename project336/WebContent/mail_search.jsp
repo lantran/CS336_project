@@ -87,6 +87,7 @@
 					String sender = rs.getString(3);
 					String msgid = rs.getString(4);
 					//out.println("<tr><td>" + id + "</td><td>" + datetime+ "</td><td>" + sender + "</td><td>" + msgid + "</td></tr>");
+					out.println("<tr><td>Message ID: " + msgid + "</td></tr>");
 					out.println("<tr><td>Date and Time: " + datetime + "</td></tr>");
 					ResultSet msgcontent = stmt2.executeQuery("SELECT title, content from message m where m.msgid= '" + msgid +"'");
 					msgcontent.next();

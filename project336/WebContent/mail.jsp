@@ -66,9 +66,9 @@
 			If you want to list all the messages, press the button List all messages
 			<input type="submit" value="List all messages " />
 		</form>
-		
+		<br><hr><br>
 		<form name="addMessage" action="mail_add.jsp" method="post">
-			Input put the information you want to send:
+			Input the information you want to send:
 			<br>
 		
 			Title : 
@@ -135,7 +135,7 @@
 			<input type="hidden" name="datetime" value='<%= datetime %>' />
 		    <input type="submit" value="Add Message" />
 		</form>
-	
+		<br><hr><br>
 		<form name="searchMessage" action="mail_search.jsp" method="post">
 			Search messages:
 			<br>
@@ -202,6 +202,16 @@
 			
 			<br>
 		    <input type="submit" value="Search Message" />
+		</form>
+		
+		<br><hr><br>
+		
+		<form name="selectItem" action="mail_delete.jsp" method="post">
+			Delete message:
+			<br>
+			Message ID:
+			<input type="text" name="msgid">
+			<input type="submit" value="Delete message" />
 		</form>
 		
 	</body>
