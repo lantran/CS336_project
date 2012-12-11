@@ -110,8 +110,7 @@
 							"', profile.dob='" + dob + "', profile.gender='" + gender + "', profile.emailAddress='" + emailAddress + 
 							"', profile.schoolName='" + schoolName + "', profile.gradYear='" + gradYear + "', profile.degree='" + degree
 							+ "' WHERE profile.profileid LIKE '" + profileid +"'");					
-				}
-				
+				}		
 
 				stmt.close();
 				con.close();	

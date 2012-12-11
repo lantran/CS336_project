@@ -243,7 +243,22 @@
 				out.println("<input type='hidden' name='processtype' value='delete' />");
 				out.println("<input type='hidden' name='userId' value=" + userId + " />");
 				out.println("<input type=\"submit\" value=\"Submit\"></form>");
+
 				
+				//Friend Interests
+				rs = stmt.executeQuery("SELECT u.userid, p.firstName, p.lastName from user u, profile p where u.profileid = p.profileid");
+				out.println("<form name=\"input\" action=\"friend_process.jsp\" method=\"post\">Search friends with similar interests to: <select name=\"friendId\">");
+				out.println("<option value=\"0\" selected>(please select:)</option>");
+				while (rs.next()) {
+					String userid = rs.getString(1);
+					String name = rs.getString(2);
+					name += " " + rs.getString(3);
+					out.println("<option value=\"" + userid + "\">" + name + "</option>");
+				}
+				out.println("</select>");
+				out.println("<input type='hidden' name='processtype' value='interests' />");
+				out.println("<input type='hidden' name='userId' value=" + userId + " />");
+				out.println("<input type=\"submit\" value=\"Search\"></form>");
 				/*
 				out.println("<table border=1 width=400>");
 				out.println("<tr><td>    userId"  + "</td><td>    ProfileId"  + "</td></tr>");
@@ -285,6 +300,7 @@
 			<input type='hidden' name='processtype' value='updateinfo' />
 			<input type="submit" value="Submit" />
 		</form>
-
+		<br><hr><br>
+		
 	</body>
 </html>

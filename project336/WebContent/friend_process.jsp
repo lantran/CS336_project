@@ -31,7 +31,6 @@
 
 	<body>
 		
-		Add friend
 		
 		<br><br><br>
 		<%
@@ -65,6 +64,26 @@
 				else if (processtype.equals("delete")) {
 					stmt.executeUpdate("DELETE FROM isfriend WHERE user='" + userId + "' and friend='" + friendId + "'");
 					out.println("DELETE " + userId+ " " + friendId);					
+				}
+				else if (processtype.equals("interests")) {
+					out.println("Friends with similar interests<br>");
+					
+					//Get profileid based on userid
+					rs = stmt.executeQuery("SELECT userid, profileid from user where user.userid LIKE '" + userId +"'");
+					rs.next();
+					String profileid = rs.getString(2);
+					String sql = "SELECT h1.interestName, p.firstName, p.lastName FROM hasinterest h1, hasinterest h2, profile p WHERE h1.interestName = h2.interestName and h1.profileid LIKE '" + profileid + "' and h2.profileid = p.profileid and h2.profileid IN (SELECT friend from isfriend where user LIKE '" + userId + "');";
+					out.println(sql);
+					rs = stmt.executeQuery(sql);
+					out.println("<table border=1 width=400>");
+					out.println("<tr><th> </th><th> </th><th> </th><th> </th></tr>");
+					while (rs.next()) {
+						String interestName = rs.getString(1);
+						String firstName = rs.getString(2);
+						String lastName = rs.getString(3);
+						out.println("<tr><td>" + interestName + "</td><td>" + firstName + " " + lastName + "</td></tr>");
+					} 
+					out.println("</table>");
 				}
 				stmt.close();
 				con.close();
